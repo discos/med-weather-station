@@ -1,4 +1,10 @@
-## installazione zdaemon
+This package contains the collections of tools neded to control the new weather station (Vaisala Weather Transmitter WXT520)
+installed at the Medicina Radiotelescope. 
+Developed and testes for Scientific Linux release 5.9 (Boron) 64 bit.
+
+Version 1.0 
+
+## zdaemon installation
 easy_install zdaemon
 
 ## installazione processing
