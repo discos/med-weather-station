@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <!-- Title -->
+  <title>Medicina weather</title>
+  <!-- Description, Keywords -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+  
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+
+  <!-- Stylesheets -->
+  <link href="static/style/bootstrap.css" rel="stylesheet">
+  <link href="static/style/font-awesome.css" rel="stylesheet">
+  <!--[if IE 7]>
+  <link rel="stylesheet" href="style/font-awesome-ie7.css">
+  <![endif]-->    
+  <link href="static/style/style.css" rel="stylesheet">
+<!-- Color Stylesheet - orange, blue, pink, brown, red or green-->
+  <link href="static/style/blue.css" rel="stylesheet">
+  <link href="static/style/bootstrap-responsive.css" rel="stylesheet">
+  
+  <!-- HTML5 Support for IE -->
+  <!--[if lt IE 9]>
+  <script src="js/html5shim.js"></script>
+  <![endif]-->
+
+  <!-- Favicon -->
+  
+
+</head>
+
+<body>
+
+<!-- Header starts -->
+
+<header>
+   <div class="container">
+      <div class="row">
+         <div class="span8">
+            <!-- Logo and site link -->
+            <div class="logo">
+              <h1><a href="#">Medicina<br/><span>Radio Astronomical Station</span></a></h1>
+            </div>
+         </div>
+         <div class="span4">
+            <div class="list">
+               <!-- Add your phone number here -->
+               <div class="phone">
+                  <i class="icon-phone"></i> Phone: +39 051 6965831
+               </div>
+               <hr />
+               <!-- Add your email id here -->
+              <div class="email">
+                  <i class="icon-envelope-alt"></i> Email: <a href="mailto:a.orlati@ira.inaf.it">Andrea Orlati</a>
+               </div>
+               <hr />
+               <!-- Add your address here -->
+               <div class="address">
+                  <i class="icon-home"></i> Medicina (Bologna) Italy
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</header>
+
+<!-- Header ends -->
+
+<!-- Navigation Starts -->
+
+<!-- Note down the syntax before editing. It is the default twitter bootstrap navigation -->
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            Menu
+          </a>
+          <div class="nav-collapse collapse">
+            <!-- Navigation links starts here -->
+            <ul class="nav">
+              <!-- Main menu -->
+              <li><a href="http://www.med.ira.inaf.it">Home</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+<!-- Navigation Ends -->   
+
+<!-- Content strats -->
+
+<div class="content">
+   <div class="container">
+      <div class="row">
+         <div class="span12">
+          <div class="hero">
+                        <!-- Title. Don't forget the <span> tag -->
+                        <h3><span>Weather</span></h3>
+                        <!-- para -->
+                        <p>Weather Station: Lat. 44°31'13.8"N Long. 11°38'48.0" E</p>
+            </div>
+            <div class="row">
+                        <div class="span6">
+                        
+                           <!-- Service 1. Class name - "serv-a" -->
+                           <div class="serv-a">
+                              <div class="serv">
+                                 <!-- Service title -->
+                                 <h4>Wind speed Max (km/h)</h4>
+                                 <!-- Service para -->
+                                 <input class="knob w_max" data-targetValue="0">
+                                 <p id="w_speed_max1"></p>
+                              </div>
+                           </div>
+                           
+                           <!-- Service 2. Class name - "serv-b" -->
+                           <div class="serv-b">
+                              <div class="serv">
+                                 <h4>Wind direction (deg°)</h4>
+                                  <input class="knob w_dir" data-targetValue="0" data-cursor=true>
+                                 <p id="w_dir_date1"></p>
+                              </div>
+                           </div>
+                           
+                           <div class="clearfix"></div>
+                        </div>                        
+                        <div class="span6">
+                        
+                           <!-- Service 3. Class name - "serv-a" -->
+                           <div class="serv-a">
+                              <div class="serv">
+                                 <h4>Wind speed (km/h)</h4>
+                                 <input class="knob w_speed" data-targetValue="0">
+                                 <p id="w_speed_date1"></p>
+                              </div>
+                           </div>
+                           
+                           <!-- Service 4. Class name - "serv-b" -->
+
+                            <div class="serv-b">
+                              <div class="serv">
+                                 <!-- Service title -->
+                                 <h4>Temperature (°C)</h4>
+                                 <!-- Service para -->
+                                 <input class="knob temp" data-targetValue="0">
+                                 <p id="temp1"></p>
+                              </div>
+                           </div>
+                           
+                           <div class="clearfix"></div>                        
+                        </div>
+
+                     </div>
+            <div class="row">
+                        <div class="span6">
+                        
+                           <!-- Service 1. Class name - "serv-a" -->
+                          
+                           <div class="serv-a">
+                              <div class="serv">
+                                 <h4>Rel. Humidity (%)</h4>
+                                  <input class="knob hum" data-targetValue="0">
+                                 <p id="hum_date1"></p>
+                              </div>
+                           </div>
+
+                           <!-- Service 2. Class name - "serv-b" -->
+                           <div class="serv-b">
+                              <div class="serv">
+                                 <h4>Air Pressure (hPa)</h4>
+                                  <input class="knob press" data-targetValue="0">
+                                 <p id="press_date1"></p>
+                              </div>
+                           </div>
+                           
+                           <div class="clearfix"></div>
+                        </div>                        
+                        <div class="span6">
+                        
+                           <!-- Service 3. Class name - "serv-a" -->
+                           <div class="serv-a">
+                              <div class="serv">
+                                 <h4>Rain Accumulation (mm)</h4>
+                                 <input class="knob r_amm" data-targetValue="0">
+                                 <p id="r_amm_date1"></p>
+                              </div>
+                           </div>
+                           
+                           <!-- Service 4. Class name - "serv-b" -->
+                           <div class="serv-b">
+                              <div class="serv">
+                                 <h4>Rain Intensity (mm/h)</h4>
+                                  <input class="knob r_int" data-targetValue="0">
+                                 <p id="r_int_date1"></p>
+                              </div>
+                           </div>
+                           
+                           <div class="clearfix"></div>                        
+                        </div>
+                     </div>
+             <div class="row">
+                        <div class="span6">
+                        
+                           <!-- Service 1. Class name - "serv-a" -->
+                          
+                           <div class="serv-a">
+                              <div class="serv">
+                                 <h4>Hail Duration (s)</h4>
+                                  <input class="knob h_dur" data-targetValue="0">
+                                 <p id="h_dur_date1"></p>
+                              </div>
+                           </div>
+
+                           <!-- Service 2. Class name - "serv-b" -->
+                           <div class="serv-b">
+                              <div class="serv">
+                                 <h4>Hail Intensity (hits/cm<sup>2</sup>h)</h4>
+                                  <input class="knob h_int" data-targetValue="0">
+                                 <p id="h_int_date1"></p>
+                              </div>
+                           </div>
+                           
+                           <div class="clearfix"></div>
+                        </div>                        
+                        <div class="span6">
+                        
+                          <div class="clearfix"></div>                        
+                        </div>
+                     </div>
+          
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- Content ends --> 
+  
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">      
+      <div class="span12"><p class="copy">
+      <!-- Copyright information. You can remove my site link. -->
+      Designed by: <a href="">Vargiu GP</a></p></div>
+    </div>
+  </div>
+</footer>   
+
+<!-- JS -->
+<script src="static/js/jquery.js"></script>
+<script src="static/js/bootstrap.js"></script>
+<script src="static/js/jquery.isotope.js"></script>
+<script src="static/js/filter.js"></script>
+<script src="static/js/modernizr.custom.28468.js"></script>
+<script src="static/js/custom.js"></script>
+<script src="static/js/jquery.knob.js"></script>
+
+<script type="text/javascript">
+
+function dateConf(dateValue) {
+        if(dateValue==="#"){
+          dateValue = "---";
+          return dateValue;
+        } else {
+          dateValue = dateValue[0] + dateValue[1] + dateValue[2] + dateValue[3] +"/"+ dateValue[4] + dateValue[5] +"/"+ dateValue[6] + dateValue[7] + " " + dateValue[8] + dateValue[9] + ":" + dateValue[10] + dateValue[11] + ":" + dateValue[12] + dateValue[13] + " - " + "UTC";
+          return dateValue;
+        }
+      }
+
+
+$(document).ready( function() {
+
+        $('.w_max', '.temp', '.w_dir', '.w_speed', '.hum', '.press', '.r_amm', 'r_int', '.h_dur', 'h_int').val(0).trigger('change').delay(10);
+
+        $(".w_max").knob({
+                'angleOffset': -125,
+                'angleArc': 250,
+                'min': 0,
+                'max': 150,
+                'readOnly': true,
+                'width': 120,
+                'height': 120,
+                'fgColor': '#4c549d',
+                'dynamicDraw': true,
+                'thickness': 0.2,
+                'tickColorizeValues': true,
+        })
+
+        $(".w_dir").knob({
+                'min': 0,
+                'max': 360,
+                'readOnly': true,
+                'width': 120,
+                'height': 120,
+                'fgColor': '#4c549d',
+                'dynamicDraw': true,
+                'thickness': 0.2,
+                'tickColorizeValues': true
+        })
+
+        $(".w_speed").knob({
+                'angleOffset': -125,
+                'angleArc': 250,
+                'min': 0,
+                'max': 100,
+                'readOnly': true,
+                'width': 120,
+                'height': 120,
+                'fgColor': '#4c549d',
+                'dynamicDraw': true,
+                'thickness': 0.2,
+                'tickColorizeValues': true,
+        })
+
+        $(".temp").knob({
+                'angleOffset': -125,
+                'angleArc': 250,
+                'min': -10,
+                'max': 60,
+                'readOnly': true,
+                'width': 120,
+                'height': 120,
+                'fgColor': '#4c549d',
+                'dynamicDraw': true,
+                'thickness': 0.2,
+                'tickColorizeValues': true,
+        })
+
+         $(".hum").knob({
+                'angleOffset': -125,
+                'angleArc': 250,
+                'min': 0,
+                'max': 100,
+                'readOnly': true,
+                'width': 120,
+                'height': 120,
+                'fgColor': '#4c549d',
+                'dynamicDraw': true,
+                'thickness': 0.2,
+                'tickColorizeValues': true,
+        })
+
+
+         $(".press").knob({
+                'angleOffset': -125,
+                'angleArc': 250,
+                'min': 800,
+                'max': 1100,
+                'readOnly': true,
+                'width': 120,
+                'height': 120,
+                'fgColor': '#4c549d',
+                'dynamicDraw': true,
+                'thickness': 0.2,
+                'tickColorizeValues': true,
+        })
+
+         $(".r_amm").knob({
+                'angleOffset': -125,
+                'angleArc': 250,
+                'min': 0,
+                'max': 500,
+                'readOnly': true,
+                'width': 120,
+                'height': 120,
+                'fgColor': '#4c549d',
+                'dynamicDraw': true,
+                'thickness': 0.2,
+                'tickColorizeValues': true,
+        })
+
+        $(".r_int").knob({
+                'angleOffset': -125,
+                'angleArc': 250,
+                'min': 0,
+                'max': 200,
+                'readOnly': true,
+                'width': 120,
+                'height': 120,
+                'fgColor': '#4c549d',
+                'dynamicDraw': true,
+                'thickness': 0.2,
+                'tickColorizeValues': true,
+        })
+
+        $(".h_dur").knob({
+                'angleOffset': -125,
+                'angleArc': 250,
+                'min': 0,
+                'max': 10000,
+                'readOnly': true,
+                'width': 120,
+                'height': 120,
+                'fgColor': '#4c549d',
+                'dynamicDraw': true,
+                'thickness': 0.2,
+                'tickColorizeValues': true,
+        })
+
+        $(".h_int").knob({
+                'angleOffset': -125,
+                'angleArc': 250,
+                'min': 0,
+                'max': 200,
+                'readOnly': true,
+                'width': 120,
+                'height': 120,
+                'fgColor': '#4c549d',
+                'dynamicDraw': true,
+                'thickness': 0.2,
+                'tickColorizeValues': true,
+        })
+
+
+        myDelay();
+
+        var tmr = self.setInterval(function () {
+            myDelay()
+        }, 20000);
+
+        
+        function myDelay() {
+            
+            $.ajax({
+            url: "static/mapData.xml",
+            dataType: "xml",
+            success: function(data) {
+ 
+        $(data).find("Sensor").each(function() {
+          if($(this).find('Id').text() == 'ta01') {
+            temp = $(this).find('Val').text();
+            temp_date = $(this).find('Date').text();
+            $('.temp').val(temp).trigger("change");
+            temp_date = dateConf(temp_date);
+            $('#temp1').html(temp_date);
+            console.log(temp);
+          }
+
+          if($(this).find('Id').text() == 'dm01') {
+            w_dir = $(this).find('Val').text();
+            w_dir_date = $(this).find('Date').text();
+            $('.w_dir').val(w_dir).trigger("change");
+            w_dir_date = dateConf(w_dir_date);
+            $('#w_dir_date1').html(w_dir_date);
+            console.log(w_dir_date);
+          }
+
+          if($(this).find('Id').text() == 'sm01') {
+            w_speed = $(this).find('Val').text()*3.6;
+            w_speed_date = $(this).find('Date').text();
+            $('.w_speed').val(w_speed).trigger("change");
+            w_speed_date = dateConf(w_speed_date);
+            $('#w_speed_date1').html(w_speed_date);
+            console.log(w_speed_date);
+          }
+
+          if($(this).find('Id').text() == 'sx01') {
+            w_max = $(this).find('Val').text()*3.6;
+            w_max_date = $(this).find('Date').text();
+            $('.w_max').val(w_max).trigger("change");
+            w_max_date = dateConf(w_max_date);
+            $('#w_speed_max1').html(w_max_date);
+            console.log(w_max_date);
+          }
+
+          if($(this).find('Id').text() == 'ua01') {
+            hum = $(this).find('Val').text();
+            hum_date = $(this).find('Date').text();
+            $('.hum').val(hum).trigger("change");
+             hum_date = dateConf(hum_date);
+            $('#hum_date1').html(hum_date);
+            console.log(hum_date);
+
+          }
+
+        if($(this).find('Id').text() == 'pa01') {
+            press = $(this).find('Val').text();
+            press_date = $(this).find('Date').text();
+            $('.press').val(press).trigger("change");
+            press_date = dateConf(press_date);
+            $('#press_date1').html(press_date);
+            console.log(press_date);
+
+          }
+
+        if($(this).find('Id').text() == 'rc01') {
+            r_amm = $(this).find('Val').text();
+            r_amm_date = $(this).find('Date').text();
+            $('.r_amm').val(r_amm).trigger("change");
+            r_amm_date = dateConf(r_amm_date);
+            $('#r_amm_date1').html(r_amm_date);
+            console.log(r_amm_date);
+          }
+
+        if($(this).find('Id').text() == 'ri01') {
+            r_int = $(this).find('Val').text();
+            r_int_date = $(this).find('Date').text();
+            $('.r_int').val(r_int).trigger("change");
+            r_int_date = dateConf(r_int_date);
+            $('#r_int_date1').html(r_int_date);
+            console.log(r_int_date);
+          }
+
+          if($(this).find('Id').text() == 'hd01') {
+            h_dur = $(this).find('Val').text();
+            h_dur_date = $(this).find('Date').text();
+            $('.h_dur').val(h_dur).trigger("change");
+            h_dur_date = dateConf(h_dur_date);
+            $('#h_dur_date1').html(h_dur_date);
+            console.log(h_dur_date);
+          }
+
+        if($(this).find('Id').text() == 'hi01') {
+            h_int = $(this).find('Val').text();
+            h_int_date = $(this).find('Date').text();
+            $('.h_int').val(h_int).trigger("change");
+            h_int_date = dateConf(h_int_date);
+            $('#h_int_date1').html(h_int_date);
+            console.log(h_int_date);
+          }
+    
+    });
+ 
+   },
+   error: function() {
+    $(".span12").children().remove(); 
+    $(".span12").first().append('<h3 class="text-error">There was an error completing your request.</h3>'+'<p class="text-info">Please try again later.</p>');
+    }
+  }); 
+          
+            
+  }
+
+
+});
+
+
+</script>
+
+</body>
+</html>
+

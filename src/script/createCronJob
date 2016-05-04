@@ -1,0 +1,6 @@
+#!/bin/bash
+TEMP=$(echo "cd "$METEOINTROOT" && cronMeteo")
+echo "PATH=$PATH" > $1
+echo "MAILTO=\"\"" >> $1
+echo "*/2 * * * * $TEMP" >> $1
+echo "Cron job configuration done!"

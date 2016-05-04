@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS Weather.PHT;
+DROP TABLE IF EXISTS Weather.Wind;
+DROP TABLE IF EXISTS Weather.Rain;
+DROP TABLE IF EXISTS Weather.Hail;
+CREATE TABLE Weather.PHT(time TIMESTAMP NOT NULL,temperature DOUBLE NOT NULL, pressure DOUBLE NOT NULL, humidity DOUBLE NOT NULL);
+CREATE TABLE Weather.Wind(time TIMESTAMP NOT NULL,wind_dir_ave DOUBLE NOT NULL,wind_speed_ave DOUBLE NOT NULL);
+CREATE TABLE Weather.Hail(time TIMESTAMP NOT NULL,hail_ammount DOUBLE NOT NULL,hail_duration DOUBLE NOT NULL,hail_intensity DOUBLE NOT NULL,hail_peak_duration DOUBLE NOT NULL);
+CREATE TABLE Weather.Rain(time TIMESTAMP NOT NULL,rain_ammount DOUBLE NOT NULL,rain_duration DOUBLE NOT NULL,rain_intensity DOUBLE NOT NULL,rain_peak_duration DOUBLE NOT NULL);

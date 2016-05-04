@@ -1,0 +1,4 @@
+#!/bin/bash
+source ../objects/infos
+sed "s/MYPWD/$CURRENTPWD/g" < $1 > $2
+echo "DB configuration done!"

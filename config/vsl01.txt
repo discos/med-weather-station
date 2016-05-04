@@ -1,0 +1,23 @@
+192.167.189.101
+21
+Th, th01
+Vh, vh01
+Vs, vs01
+Vr, vr01
+Dn, dn01
+Dm, dm01
+Dx, dx01
+Sn, sn01
+Sm, sm01
+Sx, sx01
+Ta, ta01
+Ua, ua01
+Pa, pa01
+Rc, rc01
+Rd, rd01
+Ri, ri01
+Rp, rp01
+Hc, hc01
+Hd, hd01
+Hi, hi01
+Hp, hp01

@@ -1,0 +1,25 @@
+#!/bin/bash
+USER=meteo
+
+read -p "please type the data base user password: " UN
+echo "CURRENTPWD="$UN > ../objects/infos
+read -p "this will erase all existing data, continue? [y/N]" CN
+
+if [[ $CN == "y" || $CN == "Y" ]]
+then	
+	read -p "please type the data base root password: " RN
+	sed "s/USERNAME/$USER/g" < ../DDL/createUser > ../objects/tempFile
+	sed "s/PASSWORD/$UN/g" < ../objects/tempFile > ../objects/createUser
+	rm ../objects/tempFile
+	cp ../DDL/createTables ../objects/
+	cp ../DDL/createDB ../objects 
+	mysql -u root --password=$RN < ../objects/createDB
+	mysql -u root --password=$RN < ../objects/createUser
+	mysql -u $USER --password=$UN < ../objects/createTables
+	echo "database successfully prepared!"
+else
+	echo "no database preparation!"
+	exit 0
+fi
+
+

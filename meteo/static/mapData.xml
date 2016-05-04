@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Sensors>
+<Sensor><Id>dn01</Id><Val>120.000000</Val><Date>20160414141730</Date><Info>wind dir min [deg]</Info></Sensor> 
+<Sensor><Id>dm01</Id><Val>123.000000</Val><Date>20160414141735</Date><Info>wind dir ave [deg]</Info></Sensor> 
+<Sensor><Id>dx01</Id><Val>123.000000</Val><Date>20160414141735</Date><Info>wind dir max [deg]</Info></Sensor> 
+<Sensor><Id>sn01</Id><Val>6.600000</Val><Date>20160414141740</Date><Info>wind speed min [m/s]</Info></Sensor> 
+<Sensor><Id>sm01</Id><Val>6.900000</Val><Date>20160414141740</Date><Info>wind speed ave [m/s]</Info></Sensor> 
+<Sensor><Id>sx01</Id><Val>8.300000</Val><Date>20160414141745</Date><Info>wind speed max [m/s]</Info></Sensor> 
+<Sensor><Id>ta01</Id><Val>19.400000</Val><Date>20160414141750</Date><Info>air temp [°C]</Info></Sensor> 
+<Sensor><Id>ua01</Id><Val>49.600000</Val><Date>20160414141753</Date><Info>rel. humidity [%]</Info></Sensor> 
+<Sensor><Id>pa01</Id><Val>1008.600000</Val><Date>20160414141756</Date><Info>air pressure [hPa]</Info></Sensor> 
+<Sensor><Id>rc01</Id><Val>8.100000</Val><Date>20160414140742</Date><Info>rain amount [mm]</Info></Sensor> 
+<Sensor><Id>rd01</Id><Val>8810.000000</Val><Date>20160414140742</Date><Info>rain duration [s]</Info></Sensor> 
+<Sensor><Id>ri01</Id><Val>0.000000</Val><Date>20160414140742</Date><Info>rain intensity [mm/h]</Info></Sensor> 
+<Sensor><Id>rp01</Id><Val>23.500000</Val><Date>20160414140742</Date><Info>rain peak duration [s]</Info></Sensor> 
+<Sensor><Id>hc01</Id><Val>0.000000</Val><Date>20160414140742</Date><Info>hail amount [hits/cm2]</Info></Sensor> 
+<Sensor><Id>hd01</Id><Val>0.000000</Val><Date>20160414140421</Date><Info>hail duration [s]</Info></Sensor> 
+<Sensor><Id>hi01</Id><Val>0.000000</Val><Date>20160414140742</Date><Info>hail intensity [hits/cm2h]</Info></Sensor> 
+<Sensor><Id>hp01</Id><Val>0.000000</Val><Date>20160414140742</Date><Info>hail peak duration [s]</Info></Sensor>
+<!-- end -->
+
+</Sensors>

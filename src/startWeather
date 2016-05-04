@@ -1,0 +1,12 @@
+#!/bin/bash
+cd $METEOINTROOT/logs
+zdaemon -C$METEOINTROOT/config/serverD.cfg -z$METEOINTROOT --transcript=$METEOINTROOT/logs/serverD.log start
+sleep 1s
+zdaemon -C$METEOINTROOT/config/sensorD.cfg -z$METEOINTROOT --transcript=$METEOINTROOT/logs/sensorD.log start
+sleep 1s
+zdaemon -C$METEOINTROOT/config/archiverD.cfg -z$METEOINTROOT --transcript=$METEOINTROOT/logs/archiverD.log start
+sleep 1s
+crontab -r
+crontab $METEOINTROOT/config/cronJob.cfg
+
+

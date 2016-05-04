@@ -1,0 +1,4 @@
+bin
+objects
+clientBin
+*.pyc

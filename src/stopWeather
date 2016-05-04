@@ -1,0 +1,6 @@
+#!/bin/bash
+zdaemon -C$METEOINTROOT/config/archiverD.cfg stop
+zdaemon -C$METEOINTROOT/config/sensorD.cfg stop
+zdaemon -C$METEOINTROOT/config/serverD.cfg stop
+killall child_udp
+crontab -r
