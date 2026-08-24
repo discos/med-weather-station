@@ -1,551 +1,323 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta charset="utf-8">
-  <!-- Title -->
-  <title>Medicina weather</title>
-  <!-- Description, Keywords -->
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="author" content="">
-  
-  <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+  <title>Weather Parameters Medicina Radio Astronomical Station</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #222;
+    }
 
-  <!-- Stylesheets -->
-  <link href="static/style/bootstrap.css" rel="stylesheet">
-  <link href="static/style/font-awesome.css" rel="stylesheet">
-  <!--[if IE 7]>
-  <link rel="stylesheet" href="style/font-awesome-ie7.css">
-  <![endif]-->    
-  <link href="static/style/style.css" rel="stylesheet">
-<!-- Color Stylesheet - orange, blue, pink, brown, red or green-->
-  <link href="static/style/blue.css" rel="stylesheet">
-  <link href="static/style/bootstrap-responsive.css" rel="stylesheet">
-  
-  <!-- HTML5 Support for IE -->
-  <!--[if lt IE 9]>
-  <script src="js/html5shim.js"></script>
-  <![endif]-->
+    h1 {
+      background: #0077aa;
+      color: white;
+      padding: 15px;
+      margin: 0;
+      min-height: 78px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .site-header{position:relative;background:#0077aa;}
+    .inaf-logo-link{position:absolute;top:9px;right:18px;display:block;line-height:0;}
+    .inaf-logo{width:120px;height:auto;border:0;border-radius:0;margin:0;background:white;padding:5px 7px;}
 
-  <!-- Favicon -->
-  
+    .meteo-panel {
+      width: min(1100px, 94%);
+      margin: 22px auto 10px;
+      background: white;
+      border: 2px solid #d0d0d0;
+      border-radius: 10px;
+      padding: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
 
+    .meteo-panel h2 {
+      margin: 0 0 15px;
+      color: #0077aa;
+      font-size: 1.20rem;
+    }
+
+    .meteo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .meteo-card {
+      background: #f8fbfc;
+      border: 1px solid #d9e5ea;
+      border-radius: 8px;
+      padding: 14px 10px;
+    }
+
+    .meteo-card.wind-warning {
+      background: #ffe680;
+      border-color: #d6b400;
+    }
+
+    .meteo-card.wind-alarm {
+      background: #d62828;
+      border-color: #9d1d1d;
+    }
+
+    .meteo-card.wind-alarm .meteo-label,
+    .meteo-card.wind-alarm .meteo-value {
+      color: white;
+    }
+
+    .meteo-label {
+      display: block;
+      font-size: .92rem;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    .meteo-value {
+      display: block;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .meteo-status {
+      margin-top: 13px;
+      font-size: .92rem;
+      color: #555;
+    }
+
+    .images-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 18px auto 8px;
+      padding: 0 10px;
+    }
+
+    .image-box { width: 400px; }
+    .webcam-box { width: 520px; }
+
+    .image-box h3 {
+      margin: 0 0 8px;
+      font-size: 1.05em;
+      color: #333;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    #satellite { width: 400px; }
+    #webcam { width: 520px; }
+
+    .meteoblue-wrap{display:flex;justify-content:center;margin:12px auto 6px;}
+    .meteoblue-link{display:inline-block;width: 200px;padding:11px 24px;font-size:1.05em;font-weight:700;color:white;background:#0077aa;border:2px solid #00638e;border-radius:8px;text-decoration:none;box-shadow:0 2px 5px rgba(0,0,0,.15);}
+    .meteoblue-link:hover{background:#005f88;text-decoration:none;}
+
+    #countdown {
+      font-size: 1.05em;
+      color: #333;
+      margin: 14px 0 22px;
+    }
+
+    @media (max-width: 760px) {
+      .meteo-grid { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+      .image-box, .webcam-box { width: 94vw; }
+      #satellite, #webcam { width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .meteo-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-
 <body>
+  <header class="site-header">
+    <h1>Medicina Radio Astronomical Station</h1>
+    <a class="inaf-logo-link" href="https://info.ira.inaf.it/en/" target="_blank" rel="noopener noreferrer" title="INAF - Istituto di Radioastronomia">
+      <img class="inaf-logo" src="data:image/png;base64,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" alt="INAF IRA">
+    </a>
+  </header>
 
-<!-- Header starts -->
-
-<header>
-   <div class="container">
-      <div class="row">
-         <div class="span8">
-            <!-- Logo and site link -->
-            <div class="logo">
-              <h1><a href="#">Medicina<br/><span>Radio Astronomical Station</span></a></h1>
-            </div>
-         </div>
-         <div class="span4">
-            <div class="list">
-               <!-- Add your phone number here -->
-               <div class="phone">
-                  <i class="icon-phone"></i> Phone: +39 051 6965831
-               </div>
-               <hr />
-               <!-- Add your email id here -->
-              <div class="email">
-                  <i class="icon-envelope-alt"></i> Email: <a href="mailto:andrea.orlati@inaf.it">Andrea Orlati</a>
-               </div>
-               <hr />
-               <!-- Add your address here -->
-               <div class="address">
-                  <i class="icon-home"></i> Medicina (Bologna) Italy
-               </div>
-            </div>
-         </div>
+  <section class="meteo-panel">
+    <h2>Weather Parameters (Lat. 44°31'13.8"N, Long. 11°38'48.0"E) </h2>
+    <div class="meteo-grid">
+      <div class="meteo-card">
+        <span class="meteo-label">Temperature</span>
+        <span class="meteo-value" id="temperature">-- °C</span>
       </div>
-   </div>
-</header>
-
-<!-- Header ends -->
-
-<!-- Navigation Starts -->
-
-<!-- Note down the syntax before editing. It is the default twitter bootstrap navigation -->
-
-    <div class="navbar">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            Menu
-          </a>
-          <div class="nav-collapse collapse">
-            <!-- Navigation links starts here -->
-            <ul class="nav">
-              <!-- Main menu -->
-              <li><a href="http://www.med.ira.inaf.it">Home</a></li>
-              <li><a href="http://www.med.ira.inaf.it/meteo/">Show weather statistics</a></li>
-            </ul>
-          </div>
-        </div>
+      <div class="meteo-card" id="wind_speed_card">
+        <span class="meteo-label">Wind speed</span>
+        <span class="meteo-value" id="wind_speed">-- m/s</span>
+      </div>
+      <div class="meteo-card">
+        <span class="meteo-label">Wind direction</span>
+        <span class="meteo-value" id="wind_direction">--</span>
+      </div>
+      <div class="meteo-card">
+        <span class="meteo-label">Rel. humidity</span>
+        <span class="meteo-value" id="humidity">-- %</span>
+      </div>
+      <div class="meteo-card">
+        <span class="meteo-label">Pressure</span>
+        <span class="meteo-value" id="pressure">-- hPa</span>
+      </div>
+      <div class="meteo-card">
+        <span class="meteo-label">Rain intensity</span>
+        <span class="meteo-value" id="rain_intensity">-- mm/h</span>
       </div>
     </div>
-    
-<!-- Navigation Ends -->   
+    <div class="meteo-status" id="meteo_status">Reading data...</div>
+  </section>
 
-<!-- Content strats -->
+  <div class="images-row">
+    <div class="image-box">
+      <h3>Satellite IR Meteosat 12</h3>
+      <img id="satellite"
+           src="https://modeles20.meteociel.fr/satellite/animsatirmtgit.gif"
+           alt="Animazione satellitare infrarossa Meteosat 12 - Italia - Meteociel">
+    </div>
 
-<div class="content">
-   <div class="container">
-      <div class="row">
-         <div class="span12">
-          <div class="hero">
-                        <!-- Title. Don't forget the <span> tag -->
-                        <h3><span>Weather</span></h3>
-                        <!-- para -->
-                        <p>Weather Station: Lat. 44°31'13.8"N Long. 11°38'48.0" E</p>
-            </div>
-            <div class="row">
-                        <div class="span6">
-                        
-                           <!-- Service 1. Class name - "serv-a" -->
-                           <div class="serv-a">
-                              <div class="serv">
-                                 <!-- Service title -->
-                                 <h4>Wind speed Max (km/h)</h4>
-                                 <!-- Service para -->
-                                 <input class="knob w_max" data-targetValue="0">
-                                 <p id="w_speed_max1"></p>
-                              </div>
-                           </div>
-                           
-                           <!-- Service 2. Class name - "serv-b" -->
-                           <div class="serv-b">
-                              <div class="serv">
-                                 <h4>Wind direction (deg°)</h4>
-                                  <input class="knob w_dir" data-targetValue="0" data-cursor=true>
-                                 <p id="w_dir_date1"></p>
-                              </div>
-                           </div>
-                           
-                           <div class="clearfix"></div>
-                        </div>                        
-                        <div class="span6">
-                        
-                           <!-- Service 3. Class name - "serv-a" -->
-                           <div class="serv-a">
-                              <div class="serv">
-                                 <h4>Wind speed (km/h)</h4>
-                                 <input class="knob w_speed" data-targetValue="0">
-                                 <p id="w_speed_date1"></p>
-                              </div>
-                           </div>
-                           
-                           <!-- Service 4. Class name - "serv-b" -->
-
-                            <div class="serv-b">
-                              <div class="serv">
-                                 <!-- Service title -->
-                                 <h4>Temperature (°C)</h4>
-                                 <!-- Service para -->
-                                 <input class="knob temp" data-targetValue="0">
-                                 <p id="temp1"></p>
-                              </div>
-                           </div>
-                           
-                           <div class="clearfix"></div>                        
-                        </div>
-
-                     </div>
-            <div class="row">
-                        <div class="span6">
-                        
-                           <!-- Service 1. Class name - "serv-a" -->
-                          
-                           <div class="serv-a">
-                              <div class="serv">
-                                 <h4>Rel. Humidity (%)</h4>
-                                  <input class="knob hum" data-targetValue="0">
-                                 <p id="hum_date1"></p>
-                              </div>
-                           </div>
-
-                           <!-- Service 2. Class name - "serv-b" -->
-                           <div class="serv-b">
-                              <div class="serv">
-                                 <h4>Air Pressure (hPa)</h4>
-                                  <input class="knob press" data-targetValue="0">
-                                 <p id="press_date1"></p>
-                              </div>
-                           </div>
-                           
-                           <div class="clearfix"></div>
-                        </div>                        
-                        <div class="span6">
-                        
-                           <!-- Service 3. Class name - "serv-a" -->
-                           <div class="serv-a">
-                              <div class="serv">
-                                 <h4>Rain Accumulation (mm)</h4>
-                                 <input class="knob r_amm" data-targetValue="0">
-                                 <p id="r_amm_date1"></p>
-                              </div>
-                           </div>
-                           
-                           <!-- Service 4. Class name - "serv-b" -->
-                           <div class="serv-b">
-                              <div class="serv">
-                                 <h4>Rain Intensity (mm/h)</h4>
-                                  <input class="knob r_int" data-targetValue="0">
-                                 <p id="r_int_date1"></p>
-                              </div>
-                           </div>
-                           
-                           <div class="clearfix"></div>                        
-                        </div>
-                     </div>
-             <div class="row">
-                        <div class="span6">
-                        
-                           <!-- Service 1. Class name - "serv-a" -->
-                          
-                           <div class="serv-a">
-                              <div class="serv">
-                                 <h4>Hail Duration (s)</h4>
-                                  <input class="knob h_dur" data-targetValue="0">
-                                 <p id="h_dur_date1"></p>
-                              </div>
-                           </div>
-
-                           <!-- Service 2. Class name - "serv-b" -->
-                           <div class="serv-b">
-                              <div class="serv">
-                                 <h4>Hail Intensity (hits/cm<sup>2</sup>h)</h4>
-                                  <input class="knob h_int" data-targetValue="0">
-                                 <p id="h_int_date1"></p>
-                              </div>
-                           </div>
-                           
-                           <div class="clearfix"></div>
-                        </div>                        
-                        <div class="span6">
-                        
-                          <div class="clearfix"></div>                        
-                        </div>
-                     </div>
-          
-         </div>
-      </div>
-   </div>
-</div>
-
-<!-- Content ends --> 
-  
-<!-- Footer -->
-<footer>
-  <div class="container">
-    <div class="row">      
-      <div class="span12"><p class="copy">
-      <!-- Copyright information. You can remove my site link. -->
-      Designed by: <a href="">Vargiu GP</a></p></div>
+    <div class="image-box webcam-box">
+      <h3>Live webcam Grueff Antenna</h3>
+      <img id="webcam"
+           src="https://www.med.ira.inaf.it/webcam.jpg"
+           alt="Webcam INAF">
     </div>
   </div>
-</footer>   
 
-<!-- JS -->
-<script src="static/js/jquery.js"></script>
-<script src="static/js/bootstrap.js"></script>
-<script src="static/js/jquery.isotope.js"></script>
-<script src="static/js/filter.js"></script>
-<script src="static/js/modernizr.custom.28468.js"></script>
-<script src="static/js/custom.js"></script>
-<script src="static/js/jquery.knob.js"></script>
+  <div class="meteoblue-wrap" style="gap: 12px;">
+    <a class="meteoblue-link" href="https://www.meteoblue.com/it/tempo/settimana/medicina_italia_3173660" target="_blank" rel="noopener noreferrer">Forecast</a>
+    <a class="meteoblue-link" href="https://www.med.ira.inaf.it/meteo/" target="_blank" rel="noopener noreferrer">Show Statistics</a>
+  </div>
 
-<script type="text/javascript">
+  <div id="countdown">Next data upload in 1:00</div>
 
-function dateConf(dateValue) {
-        if(dateValue==="#"){
-          dateValue = "---";
-          return dateValue;
-        } else {
-          dateValue = dateValue[0] + dateValue[1] + dateValue[2] + dateValue[3] +"/"+ dateValue[4] + dateValue[5] +"/"+ dateValue[6] + dateValue[7] + " " + dateValue[8] + dateValue[9] + ":" + dateValue[10] + dateValue[11] + ":" + dateValue[12] + dateValue[13] + " - " + "UTC";
-          return dateValue;
+  <script>
+    const XML_PATH = "/escs/meteo/static/mapData.xml";
+    const METEO_REFRESH_MS = 10000;
+
+    const WEBCAM_REFRESH_SECONDS = 20;
+    let remaining = WEBCAM_REFRESH_SECONDS;
+
+    function directionText(deg) {
+      const d = Number(deg);
+      if (!Number.isFinite(d)) return "--";
+      const names = ["N","NE","E","SE","S","SO","O","NO"];
+      const idx = Math.round((((d % 360) + 360) % 360) / 45) % 8;
+      return `${Math.round(d)}° ${names[idx]}`;
+    }
+
+    function setValue(id, value, suffix="", decimals=1) {
+      const el = document.getElementById(id);
+      const n = Number(value);
+      el.textContent = Number.isFinite(n) ? `${n.toFixed(decimals)}${suffix}` : `--${suffix}`;
+    }
+
+    function aggiornaColoreVento(windSpeedMs) {
+      const card = document.getElementById("wind_speed_card");
+      const speed = Number(windSpeedMs);
+      card.classList.remove("wind-warning", "wind-alarm");
+      if (!Number.isFinite(speed)) return;
+      if (speed >= 18.0556) {
+        card.classList.add("wind-alarm");
+      } else if (speed >= 13.8889) {
+        card.classList.add("wind-warning");
+      }
+    }
+
+    function getSensor(xml, sensorId) {
+      const sensors = xml.querySelectorAll("Sensor");
+      for (const sensor of sensors) {
+        const id = sensor.querySelector("Id")?.textContent?.trim();
+        if (id === sensorId) {
+          return {
+            value: sensor.querySelector("Val")?.textContent?.trim() ?? "",
+            date: sensor.querySelector("Date")?.textContent?.trim() ?? ""
+          };
         }
       }
-
-
-$(document).ready( function() {
-
-        $('.w_max', '.temp', '.w_dir', '.w_speed', '.hum', '.press', '.r_amm', 'r_int', '.h_dur', 'h_int').val(0).trigger('change').delay(10);
-
-        $(".w_max").knob({
-                'angleOffset': -125,
-                'angleArc': 250,
-                'min': 0,
-                'max': 150,
-                'readOnly': true,
-                'width': 120,
-                'height': 120,
-                'fgColor': '#4c549d',
-                'dynamicDraw': true,
-                'thickness': 0.2,
-                'tickColorizeValues': true,
-        })
-
-        $(".w_dir").knob({
-                'min': 0,
-                'max': 360,
-                'readOnly': true,
-                'width': 120,
-                'height': 120,
-                'fgColor': '#4c549d',
-                'dynamicDraw': true,
-                'thickness': 0.2,
-                'tickColorizeValues': true
-        })
-
-        $(".w_speed").knob({
-                'angleOffset': -125,
-                'angleArc': 250,
-                'min': 0,
-                'max': 100,
-                'readOnly': true,
-                'width': 120,
-                'height': 120,
-                'fgColor': '#4c549d',
-                'dynamicDraw': true,
-                'thickness': 0.2,
-                'tickColorizeValues': true,
-        })
-
-        $(".temp").knob({
-                'angleOffset': -125,
-                'angleArc': 250,
-                'min': -10,
-                'max': 60,
-                'readOnly': true,
-                'width': 120,
-                'height': 120,
-                'fgColor': '#4c549d',
-                'dynamicDraw': true,
-                'thickness': 0.2,
-                'tickColorizeValues': true,
-        })
-
-         $(".hum").knob({
-                'angleOffset': -125,
-                'angleArc': 250,
-                'min': 0,
-                'max': 100,
-                'readOnly': true,
-                'width': 120,
-                'height': 120,
-                'fgColor': '#4c549d',
-                'dynamicDraw': true,
-                'thickness': 0.2,
-                'tickColorizeValues': true,
-        })
-
-
-         $(".press").knob({
-                'angleOffset': -125,
-                'angleArc': 250,
-                'min': 800,
-                'max': 1100,
-                'readOnly': true,
-                'width': 120,
-                'height': 120,
-                'fgColor': '#4c549d',
-                'dynamicDraw': true,
-                'thickness': 0.2,
-                'tickColorizeValues': true,
-        })
-
-         $(".r_amm").knob({
-                'angleOffset': -125,
-                'angleArc': 250,
-                'min': 0,
-                'max': 500,
-                'readOnly': true,
-                'width': 120,
-                'height': 120,
-                'fgColor': '#4c549d',
-                'dynamicDraw': true,
-                'thickness': 0.2,
-                'tickColorizeValues': true,
-        })
-
-        $(".r_int").knob({
-                'angleOffset': -125,
-                'angleArc': 250,
-                'min': 0,
-                'max': 200,
-                'readOnly': true,
-                'width': 120,
-                'height': 120,
-                'fgColor': '#4c549d',
-                'dynamicDraw': true,
-                'thickness': 0.2,
-                'tickColorizeValues': true,
-        })
-
-        $(".h_dur").knob({
-                'angleOffset': -125,
-                'angleArc': 250,
-                'min': 0,
-                'max': 10000,
-                'readOnly': true,
-                'width': 120,
-                'height': 120,
-                'fgColor': '#4c549d',
-                'dynamicDraw': true,
-                'thickness': 0.2,
-                'tickColorizeValues': true,
-        })
-
-        $(".h_int").knob({
-                'angleOffset': -125,
-                'angleArc': 250,
-                'min': 0,
-                'max': 200,
-                'readOnly': true,
-                'width': 120,
-                'height': 120,
-                'fgColor': '#4c549d',
-                'dynamicDraw': true,
-                'thickness': 0.2,
-                'tickColorizeValues': true,
-        })
-
-
-        myDelay();
-
-        var tmr = self.setInterval(function () {
-            myDelay()
-        }, 20000);
-
-        
-        function myDelay() {
-            
-            $.ajax({
-            url: "static/mapData.xml",
-            dataType: "xml",
-            success: function(data) {
- 
-        $(data).find("Sensor").each(function() {
-          if($(this).find('Id').text() == 'ta01') {
-            temp = $(this).find('Val').text();
-            temp_date = $(this).find('Date').text();
-            $('.temp').val(temp).trigger("change");
-            temp_date = dateConf(temp_date);
-            $('#temp1').html(temp_date);
-            console.log(temp);
-          }
-
-          if($(this).find('Id').text() == 'dm01') {
-            w_dir = $(this).find('Val').text();
-            w_dir_date = $(this).find('Date').text();
-            $('.w_dir').val(w_dir).trigger("change");
-            w_dir_date = dateConf(w_dir_date);
-            $('#w_dir_date1').html(w_dir_date);
-            console.log(w_dir_date);
-          }
-
-          if($(this).find('Id').text() == 'sm01') {
-            w_speed = $(this).find('Val').text()*3.6;
-            w_speed_date = $(this).find('Date').text();
-            $('.w_speed').val(w_speed).trigger("change");
-            w_speed_date = dateConf(w_speed_date);
-            $('#w_speed_date1').html(w_speed_date);
-            console.log(w_speed_date);
-          }
-
-          if($(this).find('Id').text() == 'sx01') {
-            w_max = $(this).find('Val').text()*3.6;
-            w_max_date = $(this).find('Date').text();
-            $('.w_max').val(w_max).trigger("change");
-            w_max_date = dateConf(w_max_date);
-            $('#w_speed_max1').html(w_max_date);
-            console.log(w_max_date);
-          }
-
-          if($(this).find('Id').text() == 'ua01') {
-            hum = $(this).find('Val').text();
-            hum_date = $(this).find('Date').text();
-            $('.hum').val(hum).trigger("change");
-             hum_date = dateConf(hum_date);
-            $('#hum_date1').html(hum_date);
-            console.log(hum_date);
-
-          }
-
-        if($(this).find('Id').text() == 'pa01') {
-            press = $(this).find('Val').text();
-            press_date = $(this).find('Date').text();
-            $('.press').val(press).trigger("change");
-            press_date = dateConf(press_date);
-            $('#press_date1').html(press_date);
-            console.log(press_date);
-
-          }
-
-        if($(this).find('Id').text() == 'rc01') {
-            r_amm = $(this).find('Val').text();
-            r_amm_date = $(this).find('Date').text();
-            $('.r_amm').val(r_amm).trigger("change");
-            r_amm_date = dateConf(r_amm_date);
-            $('#r_amm_date1').html(r_amm_date);
-            console.log(r_amm_date);
-          }
-
-        if($(this).find('Id').text() == 'ri01') {
-            r_int = $(this).find('Val').text();
-            r_int_date = $(this).find('Date').text();
-            $('.r_int').val(r_int).trigger("change");
-            r_int_date = dateConf(r_int_date);
-            $('#r_int_date1').html(r_int_date);
-            console.log(r_int_date);
-          }
-
-          if($(this).find('Id').text() == 'hd01') {
-            h_dur = $(this).find('Val').text();
-            h_dur_date = $(this).find('Date').text();
-            $('.h_dur').val(h_dur).trigger("change");
-            h_dur_date = dateConf(h_dur_date);
-            $('#h_dur_date1').html(h_dur_date);
-            console.log(h_dur_date);
-          }
-
-        if($(this).find('Id').text() == 'hi01') {
-            h_int = $(this).find('Val').text();
-            h_int_date = $(this).find('Date').text();
-            $('.h_int').val(h_int).trigger("change");
-            h_int_date = dateConf(h_int_date);
-            $('#h_int_date1').html(h_int_date);
-            console.log(h_int_date);
-          }
-    
-    });
- 
-   },
-   error: function() {
-    $(".span12").children().remove(); 
-    $(".span12").first().append('<h3 class="text-error">There was an error completing your request.</h3>'+'<p class="text-info">Please try again later.</p>');
+      return { value: "", date: "" };
     }
-  }); 
-          
-            
-  }
 
+    function formatSensorDate(rawDate) {
+      if (!/^\d{14}$/.test(rawDate)) return "--";
+      const year = rawDate.slice(0,4);
+      const month = rawDate.slice(4,6);
+      const day = rawDate.slice(6,8);
+      const hour = rawDate.slice(8,10);
+      const minute = rawDate.slice(10,12);
+      const second = rawDate.slice(12,14);
+      return `${day}/${month}/${year}, ${hour}:${minute}:${second}`;
+    }
 
-});
+    async function aggiornaMeteo() {
+      const status = document.getElementById("meteo_status");
+      try {
+        const response = await fetch(XML_PATH + "?t=" + Date.now(), { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
+        const xmlText = await response.text();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(xmlText, "application/xml");
+        if (xml.querySelector("parsererror")) throw new Error("XML parsing error");
 
-</script>
+        const temperature = getSensor(xml, "ta01");
+        const windSpeed = getSensor(xml, "sm01");
+        const windDirection = getSensor(xml, "dm01");
+        const humidity = getSensor(xml, "ua01");
+        const pressure = getSensor(xml, "pa01");
+        const rainIntensity = getSensor(xml, "ri01");
 
+        setValue("temperature", temperature.value, " °C", 1);
+        setValue("wind_speed", windSpeed.value, " m/s", 1);
+        aggiornaColoreVento(windSpeed.value);
+        document.getElementById("wind_direction").textContent = directionText(windDirection.value);
+        setValue("humidity", humidity.value, " %", 1);
+        setValue("pressure", pressure.value, " hPa", 1);
+        setValue("rain_intensity", rainIntensity.value, " mm/h", 2);
+
+        status.textContent = `Values updated at: ${formatSensorDate(temperature.date)} UT`;
+      } catch (err) {
+        status.textContent = `Meteo data not available (${err.message})`;
+      }
+    }
+
+    function aggiornaWebcam() {
+      const img = document.getElementById("webcam");
+      img.src = "https://www.med.ira.inaf.it/webcam.jpg?t=" + Date.now();
+      remaining = WEBCAM_REFRESH_SECONDS;
+    }
+
+    function aggiornaCountdown() {
+      const countdown = document.getElementById("countdown");
+      const minutes = Math.floor(remaining / 60);
+      const seconds = remaining % 60;
+      countdown.textContent = `Next page upload in ${minutes}:${seconds.toString().padStart(2,"0")}`;
+      remaining--;
+      if (remaining < 0) aggiornaWebcam();
+    }
+
+    function aggiornaSatellite() {
+      const img = document.getElementById("satellite");
+      img.src = "https://modeles20.meteociel.fr/satellite/animsatirmtgit.gif?t=" + Date.now();
+    }
+
+    aggiornaMeteo();
+    setInterval(aggiornaMeteo, METEO_REFRESH_MS);
+    setInterval(aggiornaCountdown, 1000);
+    setInterval(aggiornaSatellite, 10 * 60 * 1000);
+  </script>
 </body>
 </html>
-
